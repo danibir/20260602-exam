@@ -10,8 +10,6 @@ router.post('/log-out', c_login.logout_post)
 
 router.use(m_auth.reverseAuth)
 
-router.get('/sign-up', c_login.signup_get)
-router.post('/sign-up', c_login.signup_post)
 router.get('/login', c_login.login_get)
 router.post('/login', m_rate.result, c_login.login_post)
 

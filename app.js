@@ -19,6 +19,11 @@ const app = express()
 
 const rou_main = require('./routers/rou-main')
 const rou_login = require('./routers/rou-login')
+const rou_admin = require('./routers/rou-admin')
+
+//handlers
+
+const han_main = require('./handlers/han-main')
 
 //config
 
@@ -53,9 +58,11 @@ Promise.all([
     app.use('/login', rou_login)
     app.use(mid_auth.authRestrain)
     app.use('/', rou_main)
+    app.use('/admin', rou_admin)
+    
 
     app.use((req, res) => {
-        res.status(404).render('error', { error: "404 - Page not found" })
+        han_main.renderErrorPage(res, 404, "Kunne ikke finne side")
     })
     app.listen(3000, () => {
         console.log('Server is running on port 3000 and on', os.hostname())
