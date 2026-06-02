@@ -1,0 +1,10 @@
+<nav>
+    <% if (loggedIn) { %>
+        <a href="/">Home</a>
+        <form action="/login/log-out" method="post">
+            <button>Log out</button>
+        </form>
+    <% } else { %>
+        <a href="/login/login">Login</a>
+    <% } %>
+</nav>
