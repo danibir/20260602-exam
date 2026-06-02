@@ -1,8 +1,8 @@
 # node-server-template
 
-# 20250413-preexam
+# 20260602-exam
 
-Git: https://github.com/danibir/node-server-template
+Git: https://github.com/danibir/20260602-exam
 Backend: Node.js, Express
 Frontend: EJS, CSS
 Database: MongoDB
@@ -11,19 +11,38 @@ Versjonskontroll: Git + GitHub
 
 ## Om systemet
 
-...
+Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordringer de møter i undervisningen. Lærere kan deretter svare på innleggene og hjelpe elever. Applikasjonen presenterer hver utfordring med kategorier som igjenspeiler hvor kritisk utfordringen er.
 
 ## Funksjonelle krav
 
-- ...
+- Registrering av utfordringer
+- Kategorisering av utfordringer (e.g. status)
+- Vise frem utfordringer til lærere
+- - Sortering basert på kategorier
+- - Statusendring fra lærer(e)
+
+- Full administrative funksjoner til systemadmin brukere
+- - Fjerne data fra database
+- - Opprette brukere
+- - Slette brukere
+- - Oppgradere brukere
 
 ## Driftplan
 
 | Name          | Ip Address    | Role                      | DNS                       |
 |---------------|---------------|---------------------------|---------------------------|
-| preexam-dev   | 10.12.15.80   | Development server        | -                         |
+| dev-server    | dhcp          | Development server        | -                         |
+| pub-server    | dhcp          | Production server         | -                         |
+| db-server     | dhcp          | Database server           | -                         |
 
 ...
+
+## Versjonskontroll
+
+### Branch "main" (default)
+- Nyeste ferdig versjon. Blir hostet av pub-server
+### Branch "dev"
+- Brukes for utvikling av serveren. Push commits til main etter endringene har blitt testet.
 
 ## Risikoanalyse
 
@@ -36,7 +55,7 @@ Versjonskontroll: Git + GitHub
 
 ### Tidfrist:             48 timer
 
-- Planlegging før prosjekt: 2 timer
+- Planlegging før prosjekt: 1.5 timer
 - - #### Å etablere en tydelig forståelse av prosjektets mål, avgrense funksjonalitet, sikre felles forventninger og legge grunnlaget for en strukturert utviklingsprosess. Dette inkluderer kravavklaring, gjennomgang av vurderingskriterier og utforming av en enkel systemskisse og planleggingsdokumentasjon.
 - - ...
 
@@ -56,6 +75,7 @@ Versjonskontroll: Git + GitHub
 - - ### Å gjøre løsningen forståelig og tilgjengelig for brukere med ulik teknisk kompetanse. Dette inkluderer dokumentasjon, FAQ og forklaringer som reduserer behovet for direkte support og sikrer god brukeropplevelse.
 - - Dokumentasjon
 - - FAQ
+- - Brukerveiledning
 
 ### Total utviklingstid:  ... timer
 
@@ -73,10 +93,6 @@ Versjonskontroll: Git + GitHub
 ## FAQ
 ### Konto & Innlogging ###
 
-### Avviksmeldinger ###
-
-### Etiketter ###
-
 ### Administratorer ###
 
 ### Sikkerhet & Personvern ###
@@ -91,15 +107,15 @@ Versjonskontroll: Git + GitHub
 
 ```bash
 #For å clone repo-et
-git clone https://github.com/danibir/node-server-template
-cd 20260413-preexam
+git clone https://github.com/danibir/20260602-exam
+cd 20260602-exam
 npm i
 ```
 ```bash
-#For å opdatere repoet
+#For å opdatere repoet på en server
 git fetch && git pull && npm i && pm2 restart
 ```
 ```bash
-#For å starte programmet
+#For å starte programmet lokalt
 nodemon app.js
 ```
