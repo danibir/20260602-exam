@@ -1,0 +1,14 @@
+<%- include('./partials/head') %>
+
+<form action="./create" method="post">
+    <input type="text" name="title" id="title" required>
+    <textarea name="content" id="content" required></textarea>
+    <input type="radio" name="status" id="status" value="0" required>
+    <input type="radio" name="status" id="status" value="1">
+    <input type="radio" name="status" id="status" value="2">
+    <input type="radio" name="status" id="status" value="3">
+    <% for( tag of tags ) { %>
+        <input type="checkbox" name="tags" id="tags" value="<%= tag %>">
+    <% } %>
+    <button>signup</button>
+</form>

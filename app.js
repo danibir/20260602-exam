@@ -19,6 +19,7 @@ const app = express()
 
 const rou_main = require('./routers/rou-main')
 const rou_login = require('./routers/rou-login')
+const rou_student = require('./routers/rou-student')
 const rou_admin = require('./routers/rou-admin')
 
 //handlers
@@ -58,6 +59,7 @@ Promise.all([
     app.use('/login', rou_login)
     app.use(mid_auth.authRestrain)
     app.use('/', rou_main)
+    app.use('/student', rou_student)
     app.use('/admin', rou_admin)
     
 

@@ -1,4 +1,5 @@
 const index_get = (req, res) => {
+    console.log('index get')
     res.render('index')
 }
 

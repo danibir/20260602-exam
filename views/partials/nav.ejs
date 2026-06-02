@@ -3,6 +3,9 @@
         <% if (rank == "sysadmin") { %>
             <a href="/admin/users/create">users</a>
         <% } %>
+        <% if (rank == "student") { %>
+            <a href="/student/create">create</a>
+        <% } %>
         <a href="/">Home</a>
         <form action="/login/log-out" method="post">
             <button>Log out</button>

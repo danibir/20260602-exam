@@ -4,11 +4,13 @@ const { login_perform } = require('../handlers/han-con')
 
 //login page
 const login_get = (req, res) => {
+    console.log('login get')
     res.render('login')
 }
 
 //login post logic
 const login_post = async (req, res) => {
+    console.log('login post')
     const username = req.body.username
     const password = req.body.password
     try {
@@ -24,7 +26,7 @@ const login_post = async (req, res) => {
 
 //log out
 const logout_post = (req, res) => {
-    console.log('logging out')
+    console.log('logout post')
     console.log(`# User ${req.name} (${req.rank}) logged out!`)
     res.clearCookie('user')
     res.redirect('./login')
