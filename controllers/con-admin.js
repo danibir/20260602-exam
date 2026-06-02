@@ -1,11 +1,12 @@
 const han = require('../handlers/han-mod')
+const User = require('../models/mod-user')
 const { login_perform } = require('../handlers/han-con')
 
-const createuser_get = (req, res) => {
+const userCreate_get = (req, res) => {
     console.log('createuser get')
-    res.render('adminUserCreate')
+    res.render('userCreate')
 }
-const createuser_post = async (req, res) => {
+const userCreate_post = async (req, res) => {
     console.log('createuser post')
     const username = req.body.username
     const password = req.body.password
@@ -19,8 +20,20 @@ const createuser_post = async (req, res) => {
         return res.redirect('/')
     }
 }
+const userOverview_get = async (req, res) => {
+    const users = await User.find()
+    res.render('userOverview', { users })
+}
+
+const userView_get = async (req, res) => {
+    const id = req.params._id
+    const user = await User.findById(id)
+    res.render('userView', { user })
+}
 
 module.exports = {
-    createuser_get,
-    createuser_post
+    userCreate_get,
+    userCreate_post,
+    userOverview_get,
+    userView_get
 }

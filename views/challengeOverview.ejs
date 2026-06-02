@@ -1,0 +1,5 @@
+<%- include('./partials/head') %>
+
+<% for( chall of challs ) { %>
+    <%- include('./partials/challengePreview', { chall: chall }) %>
+<% } %>

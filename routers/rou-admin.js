@@ -7,7 +7,9 @@ const mid_auth = require('../middleware/mid-auth')
 
 router.use(mid_auth.authRole('sysadmin'))
 
-router.get('/users/create', c_admin.createuser_get)
-router.post('/users/create', c_admin.createuser_post)
+router.get('/user/create', c_admin.userCreate_get)
+router.post('/user/create', c_admin.userCreate_post)
+router.get('/user/view', c_admin.userOverview_get)
+router.get('/user/view/:_id', c_admin.userView_get)
 
 module.exports = router

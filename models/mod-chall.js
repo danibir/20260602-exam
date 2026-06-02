@@ -17,7 +17,11 @@ const challSchema = new Schema({
         type: Number,
         default: 0
     },
-    tags : {
+    tags: {
+        type: Array,
+        default: []
+    },
+    replies: {
         type: Array,
         default: []
     }
