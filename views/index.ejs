@@ -1,5 +1,46 @@
 <%- include('./partials/head') %>
-<div class="center box">
-    <h1>hello</h1>
+<div class="center box flexcol">
+    <h1>HJEMMESIDE</h1>
+    <br>
+    <br>
+    <a href="/"><h2>Hjem</h2></a>
+    <p class="indexp">Dette er hjemmesiden din. Videre nedover viser deg hvordan du bruker denne websiden. Alle linkene nedenfor er tilgjenglige i navigasjonsbaren øverst på siden.</p>
+    <br>
+    <a href="/profile"><h2>Profil</h2></a>
+    <img class="indeximg" src="/imgs/profile.png" alt="">
+    <p class="indexp">Dette er brukeren din. Her vises navnet ditt og rollen din. Du kan også endre passordet ditt her gjennom "endre passord" knappen. For å endre passord, må du skrive inn det tidligere passordet ditt, og så det nye passordet to ganger.
+    Er du en student og har lagt til en utfordring tidligere, vises de nederst.
+    </p>
+    <br>
+    <% if (rank == "student") { %>
+        <a href="/student/create"><h2>Meld utfordring</h2></a>
+        <img class="indeximg" src="/imgs/createchall.png" alt="">
+        <p class="indexp">Her kan du melde en utfordring du trenger hjelp til. Oppsumer problemet ditt i tittelen, så du kan beskrive utfordringen i dypere detalje under. Velg viktigheten av problemet ditt ifølge hvor kritisk du mener utfordringen er. Legg også til passende etiketter for at lærere kan lettere sorte utfordringer.</p>
+        <br>
+    <% } %>
+    <% if (rank == "sysadmin") { %>
+        <a href="/admin/logs"><h2>Logg</h2></a>
+        <img class="indeximg" src="/imgs/log.png" alt="">
+        <p class="indexp">Denne webapplikasjoen passer på at alle auteniserte behandlinger logget, enten student, lærer eller adminstrator. Her vises loggen.</p>
+        <br>
+        <a href="/admin/user/view"><h2>Brukere</h2></a>
+        <img class="indeximg" src="/imgs/users0.png" alt="">
+        <p class="indexp">Her vises det en liste av alle brukere i databasen. Du kan bruke søkefunksjonen til å lete etter en spesiell bruker, eller du kan registrere en ny bruker, ved å klikke "Lag ny bruker".</p>
+        <img class="indeximg" src="/imgs/users1.png" alt="">
+        <p class="indexp">Når du lager en bruker, må du legge til et brukernavn og et passord ved å skrive innenfor feltene. Du må også gi brukeren en rolle, som blir enten student, lærer, eller administrator.</p>
+        <img class="indeximg" src="/imgs/users2.png" alt="">
+        <p class="indexp">Ved å klikke på en bruker på listen, kan du se på profilen deres. Du kan ikke bytte passordet deres, men du kan endre rollen deres, eller slette hele brukeren fra databasen. Hvis brukeren har tidligere gitt innlegg som utfordring meldinger eller svar, vil de vises som "Slettet-bruker".</p>
+        <br>    
+    <% } %>
+    <% if (rank == "teacher" || rank == "sysadmin") { %>
+        <a href="/teacher/chall/view"><h2>Utfordringer</h2></a>
+        <img class="indeximg" src="/imgs/challenges0.png" alt="">
+        <p class="indexp">Dette viser en katalog av diverse utfordringer lagt til av elever. Du kan søke etter tittel, eller filtere katalogen gjennom status eller etiketter. Fargen av prikken beskriver statusen til hver av utfordringene; grønn er løst, gul er lite viktig, oransje er noe viktig, og rød er veldig viktig.</p>
+        <img class="indeximg" src="/imgs/challenges1.png" alt="">
+        <p class="indexp">For å håndtere en utfordring, kan du klikke på en av utfordring i katalogen. Innenfor detaljer kan du endre status og etiketter, om det ble feil konfigurert eller utdatert. Du kan også legge en melding til utfordringen, som er leslig av eleven som meldte utfordringen og andre lærere og administratorer.</p>
+        <% if (rank == "sysadmin") { %>
+                <p class="indexp">Som en administrator, kan du slette både utfordringen (gjennom detaljeboksen) eller singulære svar til utfordringen.</p>
+        <% } %>
+    <% } %>
 </div>
 <%- include('./partials/foot') %>

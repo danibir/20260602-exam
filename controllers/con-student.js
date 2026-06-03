@@ -45,7 +45,7 @@ const challCreate_post = async (req, res) => {
     }
 }
 const challView_get = async (req, res) => {
-    setMetaData(req, res, "challcreate get", "Utfordring", "challcreate")
+    setMetaData(req, res, "challview get", "Utfordring", "challcreate")
     const id = req.params._id
     try {
         const chall = await Chall.findById(id)
@@ -58,7 +58,9 @@ const challView_get = async (req, res) => {
             chall.replies.map(async (replyId) => {
                 const replyObj = await Answ.findById(replyId)
                 const replyOp = await User.findById(replyObj.op) || { username: "Slettet-bruker" }
-                replyObj.op = replyOp
+                console.log(replyOp)
+                replyObj.user = replyOp
+                console.log(replyObj.user)
                 return replyObj
             })
         )

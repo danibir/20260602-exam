@@ -1,6 +1,6 @@
 <div class="answerbox flexrow">
     <section class="flexcol answerContent">
-        -<%= answ.op.username %>
+        ><%= answ.user.username %>
         <br>
         <%- answ.content.replace(/\n/g, '<br>') %>
     </section>
@@ -8,7 +8,7 @@
     </section>
     <section class="flexcol">
         <% if (rank == "sysadmin") { %>
-            <form action="/admin/answ/delete/<%= answ._id %>">
+            <form action="/admin/answ/delete/<%= answ._id %>" method="post">
                 <button>Slett</button>
             </form>
         <% } %>

@@ -7,10 +7,10 @@
     --lighter-grey: rgb(239, 239, 255);
     --white: rgb(255, 255, 255);
 
-    --s0: blue;
-    --s1: lime;
-    --s2: yellow;
-    --s3: red;
+    --s0: rgb(112, 255, 126);
+    --s1: rgb(255, 242, 61);
+    --s2: rgb(255, 189, 56);
+    --s3: rgb(255, 20, 20);
 
     --roof-width: 56px;
     --roof2-width: calc(var(--roof-width) - 8px);
@@ -197,4 +197,13 @@ nav a {
 }
 .statusball .s3 {
     background-color: var(--s3);
+}
+.indexp {
+    width: 25vw;
+}
+.indeximg {
+    width: 40vw;
+    border-width: 3px;
+    border-color: var(--dark-grey);
+    border-style: solid;
 }

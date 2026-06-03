@@ -35,6 +35,12 @@ const challSchema = new Schema({
     timestamps: true 
 })
 
+challSchema.statics.findReply = async function (_id) {
+    return await this.findOne({
+        replies: new mongoose.Types.ObjectId(_id)
+    })
+}
+
 challSchema.pre('findOneAndDelete', async function () {
     const doc = await this.model.findOne(this.getFilter())
     if (!doc) return

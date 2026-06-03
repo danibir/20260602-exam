@@ -3,6 +3,7 @@ const { setMetaData, render500 } = require('../handlers/han-main')
 const User = require('../models/mod-user')
 const Chall = require('../models/mod-chall')
 const Log = require('../models/mod-log')
+const Answ = require('../models/mod-answ')
 
 const log_get = async (req, res) => {
     setMetaData(req, res, "log get", "Logg", "log")
@@ -48,7 +49,7 @@ const userOverview_get = async (req, res) => {
     }
 }
 const userView_get = async (req, res) => {
-    setMetaData(req, res, "userview get", "Brukere", "users")
+    setMetaData(req, res, "userview get", "Bruker")
     const id = req.params._id
     try {
         const user = await User.findById(id)
@@ -110,13 +111,16 @@ const answDelete_post = async (req, res) => {
     const _id = req.params._id
     try {
         let answ = await Answ.findById(_id)
-        let chall = await Chall.find({ replies: id })
+        let chall = await Chall.findReply(_id)
         if (!answ) {
             return res.redirect(`/teacher/chall/view/${_id}`)
         }
+        console.log(chall)
+        chall.replies.splice(chall.replies.indexOf(_id), 1)
+        await chall.save()
         await Answ.findByIdAndDelete(_id)
-        Log.write(`${req.name} (sysadmin) deleted answer in ${chall} (${chall._id})!`)
-        res.redirect(`/teacher/chall/view`)
+        Log.write(`${req.name} (sysadmin) deleted answer in "${chall.title}" (${chall._id})!`)
+        res.redirect(`/teacher/chall/view/${chall._id}`)
     } catch (err) {
         render500(req, res, err)
     }
