@@ -29,11 +29,11 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 
 ## Driftplan
 
-| Name          | Ip Address    | Role                      | DNS                       |
-|---------------|---------------|---------------------------|---------------------------|
-| dev-server    | 10.12.15.120  | Development server        | -                         |
-| pub-server    | 10.12.15.121  | Production server         | -                         |
-| db-server     | 10.12.15.122  | Database server           | -                         |
+| Name          | Ip Address    | Role                      | DNS                           |
+|---------------|---------------|---------------------------|-------------------------------|
+| dev-server    | 10.12.15.120  | Development server        | eksamenserverdev.ikt-fag.no   |
+| pub-server    | 10.12.15.121  | Production server         | -                             |
+| db-server     | 10.12.15.122  | Database server           | -                             |
 
 ...
 
@@ -49,6 +49,7 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 | Risiko                                    | Sannsynlighet | Alvorlighet   | Risikonivå    | Tiltak                                         |
 |-------------------------------------------|---------------|---------------|---------------|------------------------------------------------|
 | Uautorisert tilgang til database          | Middels       | Middels       | Middels       | Segmentert nettverk                            |
+!legg til flere
 
 
 ## Tidsestimat
@@ -59,25 +60,25 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 - - #### Å etablere en tydelig forståelse av prosjektets mål, avgrense funksjonalitet, sikre felles forventninger og legge grunnlaget for en strukturert utviklingsprosess. Dette inkluderer kravavklaring, gjennomgang av vurderingskriterier og utforming av en enkel systemskisse og planleggingsdokumentasjon.
 - - ...
 
-- Backend-utvikling: 10.5 timer
+- Backend-utvikling: 15 timer
 - - #### Å utvikle kjernesystemet som håndterer autentisering, autorisering, brukeradministrasjon og behandling av databaser. Dette innebærer å etablere datamodeller, sikre trygg passordhåndtering, programmere meningsfull kode, og implimentere catch cases.
 - - ...
 
-- Frontend-utvikling: ... Timer
+- Frontend-utvikling: 4 Timer
 - - ### Å lage et enkelt, funksjonelt og brukervennlig grensesnitt som gjør det mulig for brukere og administratorer å samhandle med systemet. Dette inkluderer EJS‑maler, CSS‑stilark og gjenbrukbare partials for konsistent design.kt
 - - ...
 
-- Drift, protocoler og brannmur: ... timer
+- Drift, protocoler og brannmur: 4 timer
 - - ### Å sette opp en sikker og stabil produksjonsplattform. Dette innebærer konfigurering av DNS, reverse proxy, brannmurregler og nødvendige driftsrutiner for å sikre at systemet er tilgjengelig, beskyttet og riktig eksponert.
 - - ...
 
-- Brukerstøtte: ... timer
+- Brukerstøtte: 2 timer
 - - ### Å gjøre løsningen forståelig og tilgjengelig for brukere med ulik teknisk kompetanse. Dette inkluderer dokumentasjon, FAQ og forklaringer som reduserer behovet for direkte support og sikrer god brukeropplevelse.
 - - Dokumentasjon
 - - FAQ
 - - Brukerveiledning
 
-### Total utviklingstid:  ... timer
+### Total utviklingstid:  26.5 timer
 
 ## Kommunikasjonsplan
 
