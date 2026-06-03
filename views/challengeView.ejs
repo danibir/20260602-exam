@@ -1,47 +1,66 @@
 <%- include('./partials/head') %>
 
-<div class="box center flexcol">
-    <h1><%= chall.title %></h1>
-    <p>Av <%= op.username %></p>
-    <p><%- chall.content.replace(/\n/g, '<br>') %></p>
+<div class="box centerhor flexrow">
+    <section class="flexcol part">
+        <div class="flexrow center">
+            <%- include('./partials/statusball') %>
+            <h1><%= chall.title %></h1>
+        </div>
+        <p>Av <%= op.username %></p>
+        <p><%- chall.content.replace(/\n/g, '<br>') %></p>
 
-    
-    <% if (rank == "sysadmin" || rank == "teacher") { %>
-        <details class="boximportant">
-            <summary>Detaljer</summary>
-            <form class="" action="/teacher/chall/update/<%= chall._id %>" method="post">
-                <label for="status">Status</label>
-                <br>
-                <input type="radio" name="status" id="status" value="0" checked required>
-                <label for="status">Løst</label>
-                <br>
-                <input type="radio" name="status" id="status" value="1" <% if (chall.status == 1) { %>checked<% } %>>
-                <label for="status">Lite viktig</label>
-                <br>
-                <input type="radio" name="status" id="status" value="2" <% if (chall.status == 2) { %>checked<% } %>>
-                <label for="status">Noe viktig</label>
-                <br>
-                <input type="radio" name="status" id="status" value="3" <% if (chall.status == 3) { %>checked<% } %>>
-                <label for="status">Veldig viktig</label>
-                <br>
-                <br>
-                <label for="tags">Etikketer</label>
-                <br>
-                <% for( tag of tags ) { %>
-                    <input type="checkbox" name="tags" id="tags" value="<%= tag %>" <% if (chall.tags.includes(tag)) { %>checked<% } %>>
-                    <label for="tags"><%= tag %></label>
+        
+        <% if (rank == "sysadmin" || rank == "teacher") { %>
+            <details class="boximportant">
+                <summary>Detaljer</summary>
+                <form class="" action="/teacher/chall/update/<%= chall._id %>" method="post">
+                    <label for="status">Status</label>
                     <br>
-                <% } %>
-                <br>
-                <button>Lagre</button>
-            </form>
-            <% if (rank == "sysadmin") { %>
-                <form action="/admin/chall/delete/<%= chall._id %>" method="post">
-                    <button>Slett </button>
+                    <input type="radio" name="status" id="status" value="0" checked required>
+                    <label for="status">Løst</label>
+                    <br>
+                    <input type="radio" name="status" id="status" value="1" <% if (chall.status == 1) { %>checked<% } %>>
+                    <label for="status">Lite viktig</label>
+                    <br>
+                    <input type="radio" name="status" id="status" value="2" <% if (chall.status == 2) { %>checked<% } %>>
+                    <label for="status">Noe viktig</label>
+                    <br>
+                    <input type="radio" name="status" id="status" value="3" <% if (chall.status == 3) { %>checked<% } %>>
+                    <label for="status">Veldig viktig</label>
+                    <br>
+                    <br>
+                    <label for="tags">Etiketter</label>
+                    <br>
+                    <% for( tag of tags ) { %>
+                        <input type="checkbox" name="tags" id="tags" value="<%= tag %>" <% if (chall.tags.includes(tag)) { %>checked<% } %>>
+                        <label for="tags"><%= tag %></label>
+                        <br>
+                    <% } %>
+                    <br>
+                    <button>Lagre</button>
                 </form>
-            <% } %>
-        </details>
-    <% } %>
+                <% if (rank == "sysadmin") { %>
+                    <form action="/admin/chall/delete/<%= chall._id %>" method="post">
+                        <button>Slett </button>
+                    </form>
+                <% } %>
+            </details>
+            <br>
+            <br>
+        <% } %>
+        <form action="/teacher/chall/answer/<%= chall._id %>" method="post">
+            <textarea class="commentContent" name="content" id="content"></textarea>
+            <button>Kommenter</button>
+        </form>
+    </section>
+    <section class="part flexcol answersbox">
+        <h3>Svar:</h3>
+        <br>
+        <% for( answ of replies ) { %>
+            <%- include('./partials/answbox') %>
+            <br>
+        <% } %>
+    </section>
 </div>
 
 <%- include('./partials/foot') %>

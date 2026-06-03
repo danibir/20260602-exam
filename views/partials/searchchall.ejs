@@ -17,7 +17,7 @@
     <label for="status">Løst</label>
     <br>
     <br>
-    <label for="tags">Etikketer:</label>
+    <label for="tags">Etiketter:</label>
     <br>
     <% for( tag of tags ) { %>
         <input type="checkbox" name="tags" id="tags" value="<%= tag %>" <% if (query.tags && query.tags.includes(tag)) { %>checked<% } %>>

@@ -1,6 +1,7 @@
 <%- include('./partials/head') %>
 
 <div class="box center flexcol">
+    <h2>Beskriv utfordringen din</h2>
     <form class="" action="./create" method="post">
         <label for="status">Tittel</label>
         <br>
@@ -24,7 +25,7 @@
         <label for="status">Veldig viktig</label>
         <br>
         <br>
-        <label for="status">Etikketer</label>
+        <label for="status">Etiketter</label>
         <br>
         <% for( tag of tags ) { %>
             <input type="checkbox" name="tags" id="tags" value="<%= tag %>">

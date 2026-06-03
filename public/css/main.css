@@ -3,7 +3,15 @@
     --darker-grey: rgb(48, 48, 64);
     --dark-grey: rgb(96, 96, 112);
     --grey: rgb(128, 128, 144);
+    --light-grey: rgb(168, 168, 192);
     --lighter-grey: rgb(239, 239, 255);
+    --white: rgb(255, 255, 255);
+
+    --s0: blue;
+    --s1: lime;
+    --s2: yellow;
+    --s3: red;
+
     --roof-width: 56px;
     --roof2-width: calc(var(--roof-width) - 8px);
 }
@@ -45,7 +53,7 @@ nav button {
 .navbox * {
     margin: 5px;
     background-color: var(--darker-grey);
-    color: white;
+    color: var(--white);
     border-radius: 4px;
 }
 .navbox *:hover {
@@ -87,10 +95,13 @@ nav a {
     display: flex;
     flex-direction: row;
 }
+.fatlayer {
+    width: 100%;
+}
 .box {
     width: fit-content;
-    min-width: 40vw;
-    background-color: white;
+    min-width: 45vw;
+    background-color: var(--white);
     border: 4px;
     border-color: var(--lighter-grey);
     border-style: solid;
@@ -99,6 +110,7 @@ nav a {
 .box .part {
     margin: 10px;
     width: 80%;
+    max-width: 20vw;
 }
 .boximportant {
     background-color: var(--black);
@@ -111,7 +123,7 @@ nav a {
 }
 .logbox {
     background-color: var(--black);
-    color: white;
+    color: var(--white);
     width: 55vw;
 }
 .preview {
@@ -143,4 +155,46 @@ nav a {
     min-width: 100%;
     resize: none;
     height: 150px;
+}
+.commentContent {
+    min-width: 100%;
+    resize: none;
+    height: 40px;
+}
+.answersbox {
+    background-color: var(--light-grey);
+    border-color: var(--grey);
+    border-style: solid;
+    padding: 5px;
+}
+.answerbox {
+    background-color: var(--white);
+    border-color: var(--lighter-grey);
+    border-style: solid;
+    max-width: 20vw;
+    padding: 5px;
+    word-wrap: break-word;
+}
+.answerContent {
+    width: 100vw;
+    word-break: break-word;
+}
+.statusball * {
+    width: 20px;
+    height: 20px;
+    background-color: var(--light-grey);
+    border-radius: 20px;
+    margin: 10px;
+}
+.statusball .s0 {
+    background-color: var(--s0);
+}
+.statusball .s1 {
+    background-color: var(--s1);
+}
+.statusball .s2 {
+    background-color: var(--s2);
+}
+.statusball .s3 {
+    background-color: var(--s3);
 }

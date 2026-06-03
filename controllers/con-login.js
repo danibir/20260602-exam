@@ -1,16 +1,13 @@
-//import
 const han = require('../handlers/han-mod')
 const { login_perform } = require('../handlers/han-con')
+const { setMetaData, render500 } = require('../handlers/han-main')
 
-//login page
 const login_get = (req, res) => {
-    console.log('login get')
+    setMetaData(req, res, "login get", "Logg inn")
     res.render('login')
 }
-
-//login post logic
 const login_post = async (req, res) => {
-    console.log('login post')
+    setMetaData(req, res, "login post")
     const username = req.body.username
     const password = req.body.password
     try {
@@ -19,20 +16,15 @@ const login_post = async (req, res) => {
 
         res.redirect('./login')
     } catch (err) {
-        console.log(`Login post error: ${err}`)
-        res.redirect('./login')
+        render500(req, res)
     }
 }
-
-//log out
 const logout_post = (req, res) => {
-    console.log('logout post')
-    console.log(`# User ${req.name} (${req.rank}) logged out!`)
+    setMetaData(req, res, "logout post")
     res.clearCookie('user')
     res.redirect('./login')
 }
 
-//export
 module.exports = {
     login_get,
     login_post,

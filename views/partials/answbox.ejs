@@ -1,0 +1,16 @@
+<div class="answerbox flexrow">
+    <section class="flexcol answerContent">
+        -<%= answ.op.username %>
+        <br>
+        <%- answ.content.replace(/\n/g, '<br>') %>
+    </section>
+    <section class="fatlayer">
+    </section>
+    <section class="flexcol">
+        <% if (rank == "sysadmin") { %>
+            <form action="/admin/answ/delete/<%= answ._id %>">
+                <button>Slett</button>
+            </form>
+        <% } %>
+    </section>
+</div>

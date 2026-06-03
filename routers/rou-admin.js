@@ -15,6 +15,7 @@ router.get('/user/view/:_id', c_admin.userView_get)
 router.post('/user/edit/:_id', c_admin.userEdit_post)
 router.post('/user/delete/:_id', c_admin.userDelete_post)
 router.post('/chall/delete/:_id', c_admin.challDelete_post)
+router.post('/answ/delete/:_id', c_admin.answDelete_post)
 
 
 module.exports = router

@@ -19,7 +19,7 @@
         </div>
         <% if (rank == "sysadmin") { %>
             <div class="flexcol part boximportant">
-                <h3>Rediger:</h3>
+                <h3>Rolle:</h3>
                 <form action="/admin/user/edit/<%= user._id %>" method="post">
                     <input type="radio" name="rank" id="rank" value="student" checked>
                     <label for="rank">Student</label>

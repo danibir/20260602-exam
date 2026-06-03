@@ -1,54 +1,66 @@
-const han = require('../handlers/han-mod')
+const han_mod = require('../handlers/han-mod')
+const { setMetaData, render500 } = require('../handlers/han-main')
 const User = require('../models/mod-user')
 const Chall = require('../models/mod-chall')
 const Log = require('../models/mod-log')
 
 const log_get = async (req, res) => {
-    res.locals.navCurr = "log"
-    res.locals.metatitle = "Logg"
-    const logs = await Log.get()
-    res.render('logs', { logs })
+    setMetaData(req, res, "log get", "Logg", "log")
+    try {
+        const logs = await Log.get()
+        res.render('logs', { logs })
+    } catch (err) {
+        render500(req, res, err)
+    }
 }
 const userCreate_get = (req, res) => {
-    console.log('createuser get')
+    setMetaData(req, res, "usercreate get", "Registrer bruker")
     res.render('userCreate')
 }
 const userCreate_post = async (req, res) => {
-    console.log('createuser post')
+    setMetaData(req, res, "usercreate post")
     const username = req.body.username
     const password = req.body.password
     const rank = req.body.rank
     try {
-        const signup = await han.signup(username, password, rank)
+        const signup = await han_mod.signup(username, password, rank)
         if (!signup) console.log("createuser fail")
         else Log.write(`${req.name} (sysadmin) created user: ${username} (${rank})!`)
-        return res.redirect('/')
+        return res.redirect('/admin/user/view')
     } catch(err) {
-        console.log(`createuser post error: ${err}`)
-        return res.redirect('/')
+        render500(req, res, err)
     }
 }
 const userOverview_get = async (req, res) => {
+    setMetaData(req, res, "useroverview get", "Brukere", "users")
     res.locals.navCurr = "users"
     res.locals.metatitle = "Brukere"
     const search = req.query.search
     let users
-    if (search) users = await User.find({
-        username: { $regex: search, $options: "i" }
-    })
-    else users = await User.find()
-    res.render('userOverview', { users,search })
+    try {
+        if (search) users = await User.find({
+            username: { $regex: search, $options: "i" }
+        })
+        else users = await User.find()
+        res.render('userOverview', { users,search })
+    } catch (err) {
+        render500(req, res, err)
+    }
 }
-
 const userView_get = async (req, res) => {
+    setMetaData(req, res, "userview get", "Brukere", "users")
     const id = req.params._id
-    const user = await User.findById(id)
-    console.log(id)
-    console.log(user)
-    res.render('userView', { user })
+    try {
+        const user = await User.findById(id)
+        console.log(id)
+        console.log(user)
+        res.render('userView', { user })
+    } catch (err) {
+        render500(req, res, err)
+    }
 }
 const userEdit_post = async (req, res) => {
-    console.log('createuser post')
+    setMetaData(req, res, "useredit post")
     const id = req.params._id
     const rank = req.body.rank
     try {
@@ -59,11 +71,11 @@ const userEdit_post = async (req, res) => {
         Log.write(`${req.name} (sysadmin) updated user ${user.username}'s rank to (${rank})!`)
         return res.redirect('/')
     } catch(err) {
-        console.log(`createuser post error: ${err}`)
-        return res.redirect(`/admin/user/view/`)
+        render500(req, res, err)
     }
 }
 const userDelete_post = async (req, res) => {
+    setMetaData(req, res, "userdelete post")
     const id = req.params._id
     try {
         let user = await User.findById(id)
@@ -75,14 +87,14 @@ const userDelete_post = async (req, res) => {
         Log.write(`${req.name} (sysadmin) deleted user: ${user.username} (${user.rank})!`)
         return res.redirect(`/admin/user/view/`)
     } catch (err) {
-        console.log(err)
-        return res.redirect(`/admin/user/view/`)
+        render500(req, res, err)
     }
 }
 const challDelete_post = async (req, res) => {
+    setMetaData(req, res, "challDelete post")
     const _id = req.params._id
-    let chall = await Chall.findById(_id)
     try {
+        let chall = await Chall.findById(_id)
         if (!chall) {
             return res.redirect(`/teacher/chall/view/${_id}`)
         }
@@ -90,8 +102,23 @@ const challDelete_post = async (req, res) => {
         Log.write(`${req.name} (sysadmin) deleted post: ${chall.title} (${chall._id})!`)
         res.redirect(`/teacher/chall/view`)
     } catch (err) {
-        console.log(err)
-        res.redirect(`/teacher/chall/view/${_id}`)
+        render500(req, res, err)
+    }
+}
+const answDelete_post = async (req, res) => {
+    setMetaData(req, res, "answDelete post")
+    const _id = req.params._id
+    try {
+        let answ = await Answ.findById(_id)
+        let chall = await Chall.find({ replies: id })
+        if (!answ) {
+            return res.redirect(`/teacher/chall/view/${_id}`)
+        }
+        await Answ.findByIdAndDelete(_id)
+        Log.write(`${req.name} (sysadmin) deleted answer in ${chall} (${chall._id})!`)
+        res.redirect(`/teacher/chall/view`)
+    } catch (err) {
+        render500(req, res, err)
     }
 }
 
@@ -103,5 +130,6 @@ module.exports = {
     userDelete_post,
     userOverview_get,
     userView_get,
-    challDelete_post
+    challDelete_post,
+    answDelete_post
 }
