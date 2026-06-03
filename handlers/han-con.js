@@ -7,12 +7,12 @@ const login_perform = async (res, username, password) => {
     try {
         console.log('performing login')
         const login = await han.login(username, password)
-        if (!login) return console.log('incredential fails')
+        if (!login.success) return console.log('incredential fails')
 
         const token = jwt.sign({ username }, process.env.SECRET, { expiresIn: '120m' })
         res.cookie('user', token, { httpOnly: true, sameSite: 'strict'})
-        console.log(`# User ${username} (${login.rank}) logged in!`) //*
-        return login
+        console.log(`# User ${username} (${login.result.rank}) logged in!`) //*
+        return login.result
     } catch (err) {
         throw new Error(`Login perform error: ${err}`)
     }

@@ -1,2 +1,28 @@
 <%- include('./partials/head') %>
-<%- include('./partials/userPreview') %>
+<h1><%= user.username %></h1>
+<% if (name == user.username) { %>
+    <a href="/profile/changepasswd">change password</a>
+    <% if (rank == "student") { %>
+        <% for( chall of challs ) { %>
+            <%- include('./partials/challengePreview', { chall: chall, variant: "student" }) %>
+        <% } %>
+    <% } %>
+<% } %>
+<% if (rank == "sysadmin") { %>
+    <form action="/admin/user/edit/<%= user._id %>" method="post">
+        <input type="radio" name="rank" id="rank" value="student" checked>
+        <label for="rank">Student</label>
+        <br>
+        <input type="radio" name="rank" id="rank" value="teacher" <% if (user.rank == "teacher") { %>checked<% } %>>
+        <label for="rank">Lærer</label>
+        <br>
+        <input type="radio" name="rank" id="rank" value="sysadmin" <% if (user.rank == "sysadmin") { %>checked<% } %>>
+        <label for="rank">Administrator</label>
+        <br>
+        <br>
+        <button>update</button>
+    </form>
+    <form action="/admin/user/delete/<%= user._id %>" method="post">
+        <button>delete</button>
+    </form>
+<% } %>

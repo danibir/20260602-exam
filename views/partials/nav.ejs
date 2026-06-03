@@ -1,7 +1,11 @@
 <nav>
     <% if (loggedIn) { %>
+        <a href="/">Home</a>
+        <a href="/profile">profile</a>
         <% if (rank == "sysadmin") { %>
-            <a href="/admin/user/create">users</a>
+            <a href="/admin/logs">logs</a>
+            <a href="/admin/user/view">view</a>
+            <a href="/teacher/chall/view">view</a>
         <% } %>
         <% if (rank == "teacher") { %>
             <a href="/teacher/chall/view">view</a>
@@ -9,7 +13,6 @@
         <% if (rank == "student") { %>
             <a href="/student/create">create</a>
         <% } %>
-        <a href="/">Home</a>
         <form action="/login/log-out" method="post">
             <button>Log out</button>
         </form>

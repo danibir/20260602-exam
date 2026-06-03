@@ -1,5 +1,5 @@
 <%- include('./partials/head') %>
 
 <% for( chall of challs ) { %>
-    <%- include('./partials/challengePreview', { chall: chall }) %>
+    <%- include('./partials/challengePreview', { chall: chall, variant: "teacher/chall" }) %>
 <% } %>

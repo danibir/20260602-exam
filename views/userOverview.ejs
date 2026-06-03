@@ -1,4 +1,5 @@
 <%- include('./partials/head') %>
+<a href="/admin/user/create">create</a>
 <% for( user of users ) { %>
     <%- include('./partials/userPreview', { user: user }) %>
 <% } %>

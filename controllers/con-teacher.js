@@ -5,13 +5,7 @@ const challOverview_get = async (req, res) => {
     res.render('challengeOverview', { challs })
 }
 
-const challView_get = async (req, res) => {
-    const id = req.params._id
-    const chall = await Chall.findById(id)
-    res.render('challengeView', { chall })
-}
 
 module.exports = {
-    challOverview_get,
-    challView_get
+    challOverview_get
 }

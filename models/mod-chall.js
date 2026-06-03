@@ -24,6 +24,11 @@ const challSchema = new Schema({
     replies: {
         type: Array,
         default: []
+    },
+    op: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 }, {
     timestamps: true 

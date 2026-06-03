@@ -1,0 +1,6 @@
+<%- include('./partials/head') %>
+
+<% for( log of logs ) { %>
+    <code>| <%= log.date %> | <%= log.line %></code>
+    <br>
+<% } %>

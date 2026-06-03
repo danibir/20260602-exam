@@ -31,9 +31,9 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 
 | Name          | Ip Address    | Role                      | DNS                       |
 |---------------|---------------|---------------------------|---------------------------|
-| dev-server    | dhcp          | Development server        | -                         |
-| pub-server    | dhcp          | Production server         | -                         |
-| db-server     | dhcp          | Database server           | -                         |
+| dev-server    | 10.12.15.120  | Development server        | -                         |
+| pub-server    | 10.12.15.121  | Production server         | -                         |
+| db-server     | 10.12.15.122  | Database server           | -                         |
 
 ...
 
@@ -59,8 +59,8 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 - - #### Å etablere en tydelig forståelse av prosjektets mål, avgrense funksjonalitet, sikre felles forventninger og legge grunnlaget for en strukturert utviklingsprosess. Dette inkluderer kravavklaring, gjennomgang av vurderingskriterier og utforming av en enkel systemskisse og planleggingsdokumentasjon.
 - - ...
 
-- Backend-utvikling: ... timer
-- - #### Å utvikle kjernesystemet som håndterer autentisering, autorisering, brukeradministrasjon og behandling av avviksmeldinger. Dette innebærer å etablere datamodeller, sikre trygg passordhåndtering, implementere nøkkelbasert registrering og bygge API‑ene som driver hele løsningen.
+- Backend-utvikling: 10.5 timer
+- - #### Å utvikle kjernesystemet som håndterer autentisering, autorisering, brukeradministrasjon og behandling av databaser. Dette innebærer å etablere datamodeller, sikre trygg passordhåndtering, programmere meningsfull kode, og implimentere catch cases.
 - - ...
 
 - Frontend-utvikling: ... Timer
@@ -104,15 +104,27 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 ### Generelt ####
 
 ## Installasjon
+- git
+- npm
+- pm2
+- n
 
 ```bash
 #For å clone repo-et
-git clone https://github.com/danibir/20260602-exam
+git clone https://github.com/danibir/20260602-exam.git
 cd 20260602-exam
 npm i
 ```
 ```bash
-#For å opdatere repoet på en server
+#For å starte programmet på server
+pm2 start app.js
+```
+```bash
+#For å sjekke statusen av programmet på server
+pm2 status app.js
+```
+```bash
+#For å opdatere repoet på server
 git fetch && git pull && npm i && pm2 restart
 ```
 ```bash

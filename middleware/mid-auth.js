@@ -46,7 +46,7 @@ const reverseAuth = (req, res, next) => {
 }
 
 const authRole = (role) => (req, res, next) => {
-    if (req.rank != role) 
+    if (req.rank != role && req.rank != "sysadmin") 
         return han.renderErrorPage(res, 403, "Forbidden")
     next()
 }
