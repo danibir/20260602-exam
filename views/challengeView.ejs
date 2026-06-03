@@ -47,11 +47,11 @@
             </details>
             <br>
             <br>
+            <form action="/teacher/chall/answer/<%= chall._id %>" method="post">
+                <textarea class="commentContent" name="content" id="content"></textarea>
+                <button>Kommenter</button>
+            </form>
         <% } %>
-        <form action="/teacher/chall/answer/<%= chall._id %>" method="post">
-            <textarea class="commentContent" name="content" id="content"></textarea>
-            <button>Kommenter</button>
-        </form>
     </section>
     <section class="part flexcol answersbox">
         <h3>Svar:</h3>

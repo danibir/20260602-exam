@@ -34,9 +34,19 @@ app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
-app.use(helmet())
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false,
+        crossOriginOpenerPolicy: false,
+        crossOriginResourcePolicy: false,
+        originAgentCluster: false,
+        hsts: false
+    })
+)
 app.use(cookieParser())
 app.use(mid_main.setLocals)
+app.use(mid_auth.auth)
 
 //Connecting to db and starting server
 
@@ -46,6 +56,7 @@ Promise.all([
 .then(()=>{
     mid_main.dbSetStatus(true)
     console.log('Database connection success.')
+    require('./scripts/rootInit')()
 })
 .catch((err)=>{
     mid_main.dbSetStatus(false)
@@ -55,8 +66,6 @@ Promise.all([
     })
 })
 .finally(()=>{
-    app.use(mid_auth.auth)
-
     app.use('/login', rou_login)
     app.use(mid_auth.authRestrain)
     app.use('/', rou_main)
