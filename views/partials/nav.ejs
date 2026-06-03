@@ -1,22 +1,20 @@
-<nav>
+<nav class="navbox center">
     <% if (loggedIn) { %>
-        <a href="/">Home</a>
-        <a href="/profile">profile</a>
+        <a id="<% if (navCurr == "home") { %>navactive<% } %>" href="/" >Hjem</a>
+        <a id="<% if (navCurr == "profile") { %>navactive<% } %>" href="/profile">Profil</a>
         <% if (rank == "sysadmin") { %>
-            <a href="/admin/logs">logs</a>
-            <a href="/admin/user/view">view</a>
-            <a href="/teacher/chall/view">view</a>
+            <a id="<% if (navCurr == "log") { %>navactive<% } %>" href="/admin/logs">Logg</a>
+            <a id="<% if (navCurr == "users") { %>navactive<% } %>" href="/admin/user/view">Brukere</a>
+            <a id="<% if (navCurr == "chall") { %>navactive<% } %>" href="/teacher/chall/view">Utfordringer</a>
         <% } %>
         <% if (rank == "teacher") { %>
-            <a href="/teacher/chall/view">view</a>
+            <a id="<% if (navCurr == "chall") { %>navactive<% } %>" href="/teacher/chall/view">Utfordringer</a>
         <% } %>
         <% if (rank == "student") { %>
-            <a href="/student/create">create</a>
+            <a id="<% if (navCurr == "challcreate") { %>navactive<% } %>" href="/student/create">Lag utfordringanmeldelse</a>
         <% } %>
         <form action="/login/log-out" method="post">
-            <button>Log out</button>
+            <button>Logg ut</button>
         </form>
-    <% } else { %>
-        <a href="/login/login">Login</a>
     <% } %>
 </nav>

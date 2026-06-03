@@ -1,10 +1,14 @@
 <%- include('./partials/head') %>
 
-<form action="/admin/user/create" method="post">
-    <input type="text" name="username" id="username" required>
-    <input type="password" name="password" id="password" required>
-    <input type="radio" name="rank" id="rank" value="student" required>
-    <input type="radio" name="rank" id="rank" value="teacher">
-    <input type="radio" name="rank" id="rank" value="sysadmin">
-    <button>create</button>
-</form>
+<div class="box center flexcol">
+    <form action="/admin/user/create" method="post">
+        <input type="text" name="username" id="username" required>
+        <input type="password" name="password" id="password" required>
+        <input type="radio" name="rank" id="rank" value="student" required>
+        <input type="radio" name="rank" id="rank" value="teacher">
+        <input type="radio" name="rank" id="rank" value="sysadmin">
+        <button>create</button>
+    </form>
+</div>
+
+<%- include('./partials/foot') %>

@@ -106,8 +106,8 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 ## Installasjon
 - git
 - npm
-- pm2
-- n
+- pm2 (server)
+- nodemon (lokal)
 
 ```bash
 #For å clone repo-et

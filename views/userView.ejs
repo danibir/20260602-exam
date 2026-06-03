@@ -1,28 +1,45 @@
 <%- include('./partials/head') %>
-<h1><%= user.username %></h1>
-<% if (name == user.username) { %>
-    <a href="/profile/changepasswd">change password</a>
-    <% if (rank == "student") { %>
-        <% for( chall of challs ) { %>
-            <%- include('./partials/challengePreview', { chall: chall, variant: "student" }) %>
+<div class="box center flexcol">
+        
+    <section class="flexrow center part">
+        <div class="flexcol part center">
+            <h1><%= user.username %></h1>
+            <h4><%= user.rank %></h1>
+            <% if (name == user.username) { %>
+                <a href="/profile/changepasswd"><button>Endre passord</button></a>
+                <% if (rank == "student") { %>
+                    <br>
+                    <br>
+                    <h3>Dine anmeldelser</h3>
+                    <% for( chall of challs ) { %>
+                        <%- include('./partials/challengePreview', { chall: chall, variant: "student" }) %>
+                    <% } %>
+                <% } %>
+            <% } %>
+        </div>
+        <% if (rank == "sysadmin") { %>
+            <div class="flexcol part boximportant">
+                <h3>Rediger:</h3>
+                <form action="/admin/user/edit/<%= user._id %>" method="post">
+                    <input type="radio" name="rank" id="rank" value="student" checked>
+                    <label for="rank">Student</label>
+                    <br>
+                    <input type="radio" name="rank" id="rank" value="teacher" <% if (user.rank == "teacher") { %>checked<% } %>>
+                    <label for="rank">Lærer</label>
+                    <br>
+                    <input type="radio" name="rank" id="rank" value="sysadmin" <% if (user.rank == "sysadmin") { %>checked<% } %>>
+                    <label for="rank">Administrator</label>
+                    <br>
+                    <br>
+                    <button>Lagre endring</button>
+                </form>
+                <form action="/admin/user/delete/<%= user._id %>" method="post">
+                    <button>Slett bruker</button>
+                </form>
+            </div>
         <% } %>
-    <% } %>
-<% } %>
-<% if (rank == "sysadmin") { %>
-    <form action="/admin/user/edit/<%= user._id %>" method="post">
-        <input type="radio" name="rank" id="rank" value="student" checked>
-        <label for="rank">Student</label>
-        <br>
-        <input type="radio" name="rank" id="rank" value="teacher" <% if (user.rank == "teacher") { %>checked<% } %>>
-        <label for="rank">Lærer</label>
-        <br>
-        <input type="radio" name="rank" id="rank" value="sysadmin" <% if (user.rank == "sysadmin") { %>checked<% } %>>
-        <label for="rank">Administrator</label>
-        <br>
-        <br>
-        <button>update</button>
-    </form>
-    <form action="/admin/user/delete/<%= user._id %>" method="post">
-        <button>delete</button>
-    </form>
-<% } %>
+    </section>
+    <br>
+</div>
+
+<%- include('./partials/foot') %>

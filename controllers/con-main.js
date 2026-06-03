@@ -4,9 +4,13 @@ const han_mod = require('../handlers/han-mod')
 
 const index_get = (req, res) => {
     console.log('index get')
+    res.locals.navCurr = "home"
+    res.locals.metatitle = "Hjem"
     res.render('index')
 }
 const profile_get = async (req, res) => {
+    res.locals.navCurr = "profile"
+    res.locals.metatitle = "Profil"
     const user = await User.findOne({ username: req.name })
     const challs = await Chall.find({ op: user._id })
     res.render('userView', { user, challs })

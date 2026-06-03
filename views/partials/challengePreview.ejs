@@ -1,1 +1,5 @@
-<a href="/<%= variant %>/view/<%= chall._id %>"><%= chall.title %></a>
+<a class="preview" href="/<%= variant %>/view/<%= chall._id %>">
+    <%= chall.title %>
+    <br>
+    <section class="previewSubtext"><%= chall.content %></section>
+</a>

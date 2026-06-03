@@ -1,6 +1,13 @@
 <%- include('./partials/head') %>
 
-<% for( log of logs ) { %>
-    <code>| <%= log.date %> | <%= log.line %></code>
-    <br>
-<% } %>
+<div class="box center flexcol">
+    <h2>Logg</h2>
+    <div class="logbox boximportant">
+        <% for( log of logs ) { %>
+            <code>| <%= log.date %> | <%= log.line %></code>
+            <br>
+        <% } %>
+    </div>
+</div>
+
+<%- include('./partials/foot') %>

@@ -1,7 +1,20 @@
 <%- include('./partials/head') %>
 
-<form action="/login/login" method="post">
-    <input type="text" name="username" id="username">
-    <input type="password" name="password" id="password">
-    <button>login</button>
-</form>
+<div class="box center flexcol">
+    <h1>LOGG INN</h1>
+    <form action="/login/login" method="post">
+        <label for="username">Brukernavn</label>
+        <br>
+        <input type="text" name="username" id="username">
+        <br>
+        <br>
+        <label for="password">Passoord</label>
+        <br>
+        <input type="password" name="password" id="password">
+        <br>
+        <br>
+        <button>Logg inn</button>
+    </form>
+</div>
+
+<%- include('./partials/foot') %>

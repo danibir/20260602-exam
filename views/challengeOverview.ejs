@@ -1,5 +1,10 @@
 <%- include('./partials/head') %>
 
-<% for( chall of challs ) { %>
-    <%- include('./partials/challengePreview', { chall: chall, variant: "teacher/chall" }) %>
-<% } %>
+<div class="box center flexcol">
+    <%- include('./partials/searchbar', {place: "view"}) %>
+    <% for( chall of challs ) { %>
+        <%- include('./partials/challengePreview', { chall: chall, variant: "teacher/chall" }) %>
+    <% } %>
+</div>
+
+<%- include('./partials/foot') %>

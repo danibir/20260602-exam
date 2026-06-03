@@ -1,3 +1,131 @@
+:root {
+    --black: rgb(0, 0, 16);
+    --darker-grey: rgb(48, 48, 64);
+    --dark-grey: rgb(96, 96, 112);
+    --grey: rgb(128, 128, 144);
+    --lighter-grey: rgb(239, 239, 255);
+    --roof-width: 56px;
+    --roof2-width: calc(var(--roof-width) - 8px);
+}
+
+
 body {
     background-color: gainsboro;
+    word-wrap: break-word
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--roof-width);
+    background: var(--black);
+}
+#roof {
+    height: var(--roof2-width);
+}
+
+
+nav button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.navbox {
+    background-color: var(--black);
+    border-radius: 8px;
+}
+.navbox * {
+    margin: 5px;
+    background-color: var(--darker-grey);
+    color: white;
+    border-radius: 4px;
+}
+.navbox *:hover {
+    background-color: var(--dark-grey);
+}
+.navbox *:active {
+    background-color: var(--black);
+}
+.navbox button {
+    background-color: transparent;
+}
+.navbox form:hover {
+    background-color: var(--dark-grey);
+}
+.navbox form:active {
+    background-color: var(--black);
+}
+.navbox #navactive {
+    color: var(--grey)
+}
+nav a {
+    padding: 5px;
+    text-decoration: none;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexcol {
+    display: flex;
+    flex-direction: column;
+}
+.flexrow {
+    display: flex;
+    flex-direction: row;
+}
+.box {
+    width: 40vw;
+    background-color: white;
+    border: 4px;
+    border-color: var(--lighter-grey);
+    border-style: solid;
+    padding: 5px;
+}
+.box .part {
+    margin: 10px;
+    width: 80%;
+}
+.boximportant {
+    background-color: var(--black);
+    border-width: 4px;
+    border-color: var(--dark-grey);
+    border-radius: 7px;
+    color: var(--lighter-grey);
+    border-style: solid;
+    padding: 5px;
+}
+.logbox {
+    background-color: var(--black);
+    color: white;
+}
+.preview {
+    border-width: 2px;
+    border-color: var(--grey);
+    border-radius: 2px;
+    border-style: solid;
+    width: 50%;
+    padding: 7px;
+    text-decoration: none;
+    color: var(--black);
+    text-align: center;
+    margin: 4px;
+}
+.preview .previewSubtext {
+    color: var(--dark-grey)
+}
+.preview:hover {
+    background-color: var(--lighter-grey);
+}
+.preview:active {
+    background-color: var(--grey);
 }

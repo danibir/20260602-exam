@@ -4,6 +4,8 @@ const Chall = require('../models/mod-chall')
 const Log = require('../models/mod-log')
 
 const log_get = async (req, res) => {
+    res.locals.navCurr = "log"
+    res.locals.metatitle = "Logg"
     const logs = await Log.get()
     res.render('logs', { logs })
 }
@@ -27,8 +29,15 @@ const userCreate_post = async (req, res) => {
     }
 }
 const userOverview_get = async (req, res) => {
-    const users = await User.find()
-    res.render('userOverview', { users })
+    res.locals.navCurr = "users"
+    res.locals.metatitle = "Brukere"
+    const search = req.query.search
+    let users
+    if (search) users = await User.find({
+        username: { $regex: search, $options: "i" }
+    })
+    else users = await User.find()
+    res.render('userOverview', { users,search })
 }
 
 const userView_get = async (req, res) => {
@@ -38,21 +47,36 @@ const userView_get = async (req, res) => {
     console.log(user)
     res.render('userView', { user })
 }
+const userEdit_post = async (req, res) => {
+    console.log('createuser post')
+    const id = req.params._id
+    const rank = req.body.rank
+    try {
+        let user = await User.findById(id)
+        if (!user) return res.redirect(`/admin/user/view/`)
+        user.rank = rank
+        user.save()
+        Log.write(`${req.name} (sysadmin) updated user ${user.username}'s rank to (${rank})!`)
+        return res.redirect('/')
+    } catch(err) {
+        console.log(`createuser post error: ${err}`)
+        return res.redirect(`/admin/user/view/`)
+    }
+}
 const userDelete_post = async (req, res) => {
     const id = req.params._id
-    let user = await User.findById(id)
-    console.log(id)
-    console.log(user)
     try {
-        if (!user) {
-            return res.redirect(`/admin/user/view/`)
-        }
+        let user = await User.findById(id)
+        console.log(id)
+        console.log(user)
+        if (!user) return res.redirect(`/admin/user/view/`)
+
         user = await User.findByIdAndDelete(id)
         Log.write(`${req.name} (sysadmin) deleted user: ${user.username} (${user.rank})!`)
-        res.redirect(`/admin/user/view/`)
+        return res.redirect(`/admin/user/view/`)
     } catch (err) {
         console.log(err)
-        res.redirect(`/admin/user/view/`)
+        return res.redirect(`/admin/user/view/`)
     }
 }
 const challDelete_post = async (req, res) => {
@@ -75,6 +99,7 @@ module.exports = {
     log_get,
     userCreate_get,
     userCreate_post,
+    userEdit_post,
     userDelete_post,
     userOverview_get,
     userView_get,

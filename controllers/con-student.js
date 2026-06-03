@@ -3,6 +3,8 @@ const User = require('../models/mod-user')
 const Log = require('../models/mod-log')
 
 const challCreate_get = (req, res) => {
+    res.locals.navCurr = "challcreate"
+    res.locals.metatitle = "Registrer utfordring"
     console.log('challCreate get')
     const tags = Chall.AVAILABLE_TAGS
     res.render('challengeRegister', { tags })
@@ -42,6 +44,7 @@ const challCreate_post = async (req, res) => {
 }
 
 const challView_get = async (req, res) => {
+    res.locals.metatitle = "Utfordring"
     const id = req.params._id
     const chall = await Chall.findById(id)
     const tags = Chall.AVAILABLE_TAGS
