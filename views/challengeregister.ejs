@@ -1,37 +1,40 @@
 <%- include('./partials/head') %>
 
-<form action="./create" method="post">
-    <label for="status">Tittel</label>
-    <br>
-    <input type="text" name="title" id="title" required>
-    <br>
-    <br>
-    <label for="status">Detaljer</label>
-    <br>
-    <textarea name="content" id="content" required></textarea>
-    <br>
-    <br>
-    <label for="status">Status</label>
-    <br>
-    <input type="radio" name="status" id="status" value="0" required>
-    <label for="status">Ikke viktig</label>
-    <input type="radio" name="status" id="status" value="1">
-    <label for="status">Lite viktig</label>
-    <input type="radio" name="status" id="status" value="2">
-    <label for="status">Noe viktig</label>
-    <input type="radio" name="status" id="status" value="3">
-    <label for="status">Veldig viktig</label>
-    <br>
-    <br>
-    <label for="status">Etikketer</label>
-    <br>
-    <% for( tag of tags ) { %>
-        <input type="checkbox" name="tags" id="tags" value="<%= tag %>">
-        <label for="tags"><%= tag %></label>
-    <% } %>
-    <br>
-    <br>
-    <button>signup</button>
-</form>
+<div class="box center flexcol">
+    <form class="" action="./create" method="post">
+        <label for="status">Tittel</label>
+        <br>
+        <input type="text" name="title" id="title" class="registerTitle" maxlength="50" required>
+        <br>
+        <br>
+        <label for="status">Detaljer</label>
+        <br>
+        <textarea name="content" id="content" class="registerContent" required></textarea>
+        <br>
+        <br>
+        <label for="status">Status</label>
+        <br>
+        <input type="radio" name="status" id="status" value="1">
+        <label for="status">Lite viktig</label>
+        <br>
+        <input type="radio" name="status" id="status" value="2">
+        <label for="status">Noe viktig</label>
+        <br>
+        <input type="radio" name="status" id="status" value="3">
+        <label for="status">Veldig viktig</label>
+        <br>
+        <br>
+        <label for="status">Etikketer</label>
+        <br>
+        <% for( tag of tags ) { %>
+            <input type="checkbox" name="tags" id="tags" value="<%= tag %>">
+            <label for="tags"><%= tag %></label>
+            <br>
+        <% } %>
+        <br>
+        <br>
+        <button>Registrer</button>
+    </form>
+</div>
 
 <%- include('./partials/foot') %>

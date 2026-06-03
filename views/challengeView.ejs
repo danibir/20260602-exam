@@ -3,7 +3,7 @@
 <div class="box center flexcol">
     <h1><%= chall.title %></h1>
     <p>Av <%= op.username %></p>
-    <p><%= chall.content %></p>
+    <p><%- chall.content.replace(/\n/g, '<br>') %></p>
 
     
     <% if (rank == "sysadmin" || rank == "teacher") { %>
@@ -13,7 +13,7 @@
                 <label for="status">Status</label>
                 <br>
                 <input type="radio" name="status" id="status" value="0" checked required>
-                <label for="status">Ikke viktig</label>
+                <label for="status">Løst</label>
                 <br>
                 <input type="radio" name="status" id="status" value="1" <% if (chall.status == 1) { %>checked<% } %>>
                 <label for="status">Lite viktig</label>

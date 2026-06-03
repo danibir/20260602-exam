@@ -4,11 +4,20 @@ const challOverview_get = async (req, res) => {
     res.locals.navCurr = "chall"
     res.locals.metatitle = "Utfordringer"
     const search = req.query.search
-    let challs
-    if (search) challs = await Chall.find({
-        title: { $regex: search, $options: "i" }
-    })
-    else challs = await Chall.find()
+    const usedTags = req.query.tags || []
+    const status = req.query.status
+
+    const query = {}
+    if (search) {
+        query.title = { $regex: search, $options: "i" }
+    }
+    if (usedTags.length > 0) {
+        query.tags = { $all: usedTags }
+    }
+    if (status) {
+        query.status = status
+    }
+    let challs = await Chall.find(query)
     challs.forEach((elm) => {
         const titlemax = 30
         const contentmax = 40
@@ -17,7 +26,8 @@ const challOverview_get = async (req, res) => {
         if (elm.content.length > contentmax)
             elm.content = elm.content.substring(0, contentmax) + "..."
     })
-    res.render('challengeOverview', { challs, search })
+    const tags = Chall.AVAILABLE_TAGS
+    res.render('challengeOverview', { challs, tags, query: req.query })
 }
 
 

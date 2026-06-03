@@ -11,7 +11,7 @@
 
 body {
     background-color: gainsboro;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 body::before {
     content: "";
@@ -75,6 +75,10 @@ nav a {
     justify-content: center;
     align-items: center;
 }
+.centerhor {
+    display: flex;
+    justify-content: center;
+}
 .flexcol {
     display: flex;
     flex-direction: column;
@@ -84,7 +88,8 @@ nav a {
     flex-direction: row;
 }
 .box {
-    width: 40vw;
+    width: fit-content;
+    min-width: 40vw;
     background-color: white;
     border: 4px;
     border-color: var(--lighter-grey);
@@ -107,13 +112,14 @@ nav a {
 .logbox {
     background-color: var(--black);
     color: white;
+    width: 55vw;
 }
 .preview {
     border-width: 2px;
     border-color: var(--grey);
     border-radius: 2px;
     border-style: solid;
-    width: 50%;
+    width: 80%;
     padding: 7px;
     text-decoration: none;
     color: var(--black);
@@ -128,4 +134,13 @@ nav a {
 }
 .preview:active {
     background-color: var(--grey);
+}
+.registerTitle {
+    width: 100%;
+}
+.registerContent {
+    width: 20vw;
+    min-width: 100%;
+    resize: none;
+    height: 150px;
 }

@@ -12,7 +12,7 @@ const challCreate_get = (req, res) => {
 
 const challCreate_post = async (req, res) => {
     console.log('challCreate post')
-    const title = req.body.title
+    const title = req.body.title.slice(0, 50)
     const content = req.body.content
     const status = Number(req.body.status)
 
