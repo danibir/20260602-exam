@@ -61,46 +61,46 @@ Denne nodeserveren er en norsk webapplikasjon der elever kan registrere utfordri
 
 - Planlegging før prosjekt: 1.5 timer
 - - #### Å etablere en tydelig forståelse av prosjektets mål, avgrense funksjonalitet, sikre felles forventninger og legge grunnlaget for en strukturert utviklingsprosess. Dette inkluderer kravavklaring, gjennomgang av vurderingskriterier og utforming av en enkel systemskisse og planleggingsdokumentasjon.
-- - Kravspesifikasjon, avklare funksjoner, roller og brukerflyt
-- - Systemskisse, tegne enkel arkitektur og datamodeller
-- - Plan for versjonskontroll, definere branching‑strategi
-- - Risikovurdering, identifisere tekniske og organisatoriske risikoer
+- - - Kravspesifikasjon, avklare funksjoner, roller og brukerflyt
+- - - Systemskisse, tegne enkel arkitektur og datamodeller
+- - - Plan for versjonskontroll, definere branching‑strategi
+- - - Risikovurdering, identifisere tekniske og organisatoriske risikoer
 
 - Backend-utvikling: 15 timer
 - - #### Å utvikle kjernesystemet som håndterer autentisering, autorisering, brukeradministrasjon og behandling av databaser. Dette innebærer å etablere datamodeller, sikre trygg passordhåndtering, programmere meningsfull kode, og implimentere catch cases.
-- - Oppsett av Express‑server
-- - Datamodeller i MongoDB
-- - Autentisering og autorisering
-- - Admin‑funksjoner, opprette/slette/oppgradere brukere
-- - CRUD for utfordringer
-- - Validering og feilhåndtering
-- - Logging
-- - Sikkerhet 
-- - - Helmet
-- - - Rate limiting
-- - - Passordhash
-- - Catch cases og formvalidering
+- - - Oppsett av Express‑server
+- - - Datamodeller i MongoDB
+- - - Autentisering og autorisering
+- - - Admin‑funksjoner, opprette/slette/oppgradere brukere
+- - - CRUD for utfordringer
+- - - Validering og feilhåndtering
+- - - - Logging
+- - - - Sikkerhet 
+- - - - Helmet
+- - - - Rate limiting
+- - - - Passordhash
+- - - Catch cases og formvalidering
 
 - Frontend-utvikling: 4 Timer
 - - ### Å lage et enkelt, funksjonelt og brukervennlig grensesnitt som gjør det mulig for brukere og administratorer å samhandle med systemet. Dette inkluderer EJS‑maler, CSS‑stilark og gjenbrukbare partials for konsistent design.kt
-- - EJS sider
-- - - Partials
-- - CSS design
-- - UI
+- - - EJS sider
+- - - - Partials
+- - - CSS design
+- - - UI
 
 - Drift, protocoler og brannmur: 4 timer
 - - ### Å sette opp en sikker og stabil produksjonsplattform. Dette innebærer konfigurering av DNS, reverse proxy, brannmurregler og nødvendige driftsrutiner for å sikre at systemet er tilgjengelig, beskyttet og riktig eksponert.
-- - Nginx reverse proxy
-- - PM2 oppsett
-- - UFW konfigurasjon
-- - DNS
-- - Versionskontroll
+- - - Nginx reverse proxy
+- - - PM2 oppsett
+- - - UFW konfigurasjon
+- - - DNS
+- - - Versionskontroll
 
 - Brukerstøtte: 2 timer
 - - ### Å gjøre løsningen forståelig og tilgjengelig for brukere med ulik teknisk kompetanse. Dette inkluderer dokumentasjon, guider og forklaringer som reduserer behovet for direkte support og sikrer god brukeropplevelse.
-- - Dokumentasjon
-- - Brukerveiledning
-- - Logging i terminal
+- - - Dokumentasjon
+- - - Brukerveiledning
+- - - Logging i terminal
 
 ### Total utviklingstid:  26.5 timer
 
