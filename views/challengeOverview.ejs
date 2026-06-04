@@ -6,8 +6,12 @@
         <%- include('./partials/searchchall', {place: "view", independant: false}) %>
     </section>
     <section class="center flexcol part">
+        <h1>Utfordringer</h1>
         <% for( chall of challs ) { %>
             <%- include('./partials/challengePreview', { chall: chall, variant: "teacher/chall" }) %>
+        <% } %>
+        <% if ( challs.length == 0) { %>
+            <p>Kunne ikke finne utfordringer.</p>
         <% } %>
     </section>
 </div>

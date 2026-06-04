@@ -15,7 +15,7 @@ const profile_get = async (req, res) => {
         const challs = await Chall.find({ op: user._id })
         res.render('userView', { user, challs })
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 const changepasswd_get = async (req, res) => {
@@ -42,7 +42,7 @@ const changepasswd_post = async (req, res) => {
         popUp(res, "good", "Byttet passord!")
         res.redirect('/profile')
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 

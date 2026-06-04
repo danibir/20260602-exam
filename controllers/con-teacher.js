@@ -32,10 +32,14 @@ const challOverview_get = async (req, res) => {
             if (elm.content.length > contentmax)
                 elm.content = elm.content.substring(0, contentmax) + "..."
         })
+        challs.sort((a, b) => {
+            if (b.status !== a.status) return b.status - a.status
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
         const tags = Chall.AVAILABLE_TAGS
         res.render('challengeOverview', { challs, tags, query: req.query })
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 const challEdit_post = async (req, res) => {
@@ -86,7 +90,7 @@ const answerCreate_post = async (req, res) => {
         Log.write(`${req.name} (${req.rank}) answered "${chall.title}" (${chall._id})`)
         return res.redirect(`/teacher/chall/view/${id}`)
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 

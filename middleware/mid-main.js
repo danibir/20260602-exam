@@ -6,7 +6,6 @@ const setLocals = (req, res, next) => {
     res.locals.navCurr = ""
     res.locals.popup = req.cookies?.popup
     res.clearCookie('popup')
-    console.log(req.cookies)
     req.user = NaN
     next()
 }

@@ -2,6 +2,7 @@
 
 <div class="box centerhor flexrow">
     <section class="flexcol part">
+        <h1>Utfordring</h1>
         <div class="flexrow center">
             <%- include('./partials/statusball') %>
             <h1><%= chall.title %></h1>
@@ -48,7 +49,7 @@
             <br>
             <br>
             <form action="/teacher/chall/answer/<%= chall._id %>" method="post">
-                <textarea class="commentContent" name="content" id="content"></textarea>
+                <textarea placeholder="Skriv inn svar..." class="commentContent" name="content" id="content"></textarea>
                 <button>Kommenter</button>
             </form>
         <% } %>

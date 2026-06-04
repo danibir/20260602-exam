@@ -125,13 +125,12 @@ const answDelete_post = async (req, res) => {
     setMetaData(req, res, "answDelete post")
     const _id = req.params._id
     try {
-        let answ = await Answ.findById(_id)
-        let chall = await Chall.findReply(_id)
+        const answ = await Answ.findById(_id)
+        const chall = await Chall.findReply(_id)
         if (!answ) {
             popUp(res, "bad", `Svaret kunne ikke bli funnet`)
             return res.redirect(`/teacher/chall/view/${_id}`)
         }
-        console.log(chall)
         chall.replies.splice(chall.replies.indexOf(_id), 1)
         await chall.save()
         await Answ.findByIdAndDelete(_id)
