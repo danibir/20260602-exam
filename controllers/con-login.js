@@ -19,7 +19,7 @@ const login_post = async (req, res) => {
         popUp(res, "good", "Logget inn!")
         return res.redirect('/')
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 const logout_post = (req, res) => {

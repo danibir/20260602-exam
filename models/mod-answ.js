@@ -13,6 +13,10 @@ const answSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    feedback: {
+        type: String,
+        default: ""
     }
 }, {
     timestamps: true 

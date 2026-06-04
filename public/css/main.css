@@ -239,3 +239,17 @@ nav a {
     width: 6%;
     height: 6%;
 }
+.feedbackbox {
+    background-color: var(--lighter-grey);
+    border-color: var(--light-grey);
+    color: var(--darker-grey);
+    border-style: solid;
+    max-width: 20vw;
+    padding: 5px;
+    word-wrap: break-word;
+}
+.feedbackTextarea {
+    min-width: 100%;
+    resize: none;
+    height: 40px;
+}

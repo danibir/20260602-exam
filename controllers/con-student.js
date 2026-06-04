@@ -46,11 +46,11 @@ const challCreate_post = async (req, res) => {
         Log.write(`${op.username} (${op.rank}) created post: ${chall.title} (${chall._id})!`)
         res.redirect('/')
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
     }
 }
 const challView_get = async (req, res) => {
-    setMetaData(req, res, "challview get", "Utfordring", "challcreate")
+    setMetaData(req, res, "challview get", "Utfordring")
     const id = req.params._id
     try {
         const chall = await Chall.findById(id)
@@ -71,12 +71,36 @@ const challView_get = async (req, res) => {
         )
         res.render('challengeView', { chall, tags, op, replies })
     } catch (err) {
-        render500(req, res)
+        render500(req, res, err)
+    }
+}
+const answFeedback_post = async (req, res) => {
+    setMetaData(req, res, "answFeedback post")
+    const id = req.params._id
+    const feedback = req.body.feedback
+    const path = req.body.path
+    try {
+        console.log(feedback)
+        console.log(id)
+        console.log(path)
+        const answ = await Answ.findById(id)
+        console.log(answ)
+        if (!answ) {
+            popUp(res, "bad", "Kunne ikke finne svar")
+            return res.redirect(`/student/view/${path}`)
+        }
+        answ.feedback = feedback
+        await answ.save()
+        popUp(res, "good", "Tilbakemelding sendt!")
+        return res.redirect(`/student/view/${path}`)
+    } catch(err) {
+        render500(req, res, err)
     }
 }
 
 module.exports = {
     challCreate_get,
     challCreate_post,
-    challView_get
+    challView_get,
+    answFeedback_post
 }

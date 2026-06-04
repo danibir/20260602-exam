@@ -1,16 +1,34 @@
-<div class="answerbox flexrow">
-    <section class="flexcol answerContent">
-        ><%= answ.user.username %>
-        <br>
-        <%- answ.content.replace(/\n/g, '<br>') %>
-    </section>
-    <section class="fatlayer">
-    </section>
-    <section class="flexcol">
-        <% if (rank == "sysadmin") { %>
-            <form action="/admin/answ/delete/<%= answ._id %>" method="post">
-                <button>Slett</button>
+<section class="answerbox flexcol">
+    <div class="flexrow">
+        <section class="flexcol answerContent">
+            ><%= answ.user.username %>
+            <br>
+            <%- answ.content.replace(/\n/g, '<br>') %>
+        </section>
+        <section class="fatlayer">
+        </section>
+        <section class="flexcol">
+            <% if (rank == "sysadmin") { %>
+                <form action="/admin/answ/delete/<%= answ._id %>" method="post">
+                    <button>Slett</button>
+                </form>
+            <% } %>
+        </section>
+    </div>
+</section>
+<% if (answ.feedback || rank == "student") { %>
+    <section class="feedbackbox">
+        <% if (rank == "student") { %>
+            <form action="/student/answ/feedback/<%= answ._id %>" method="post">
+                <label for="feedback">Tilbakemelding</label>
+                <textarea placeholder="Skriv tilbakemelding..." class="feedbackTextarea" name="feedback" id="feedback"><%= answ.feedback %></textarea>
+                <input type="hidden" name="path" id="path" value="<%= chall._id %>">
+                <button>Lagre</button>
             </form>
+        <% } else if (answ.feedback){ %>
+            ><%= op.username %>
+            <br>
+            <%- answ.feedback.replace(/\n/g, '<br>') %>
         <% } %>
     </section>
-</div>
+<% } %>
