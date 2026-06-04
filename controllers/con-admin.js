@@ -1,5 +1,6 @@
 const han_mod = require('../handlers/han-mod')
 const { setMetaData, render500 } = require('../handlers/han-main')
+const { popUp } = require('../handlers/han-con')
 const User = require('../models/mod-user')
 const Chall = require('../models/mod-chall')
 const Log = require('../models/mod-log')
@@ -25,8 +26,12 @@ const userCreate_post = async (req, res) => {
     const rank = req.body.rank
     try {
         const signup = await han_mod.signup(username, password, rank)
-        if (!signup) console.log("createuser fail")
-        else Log.write(`${req.name} (sysadmin) created user: ${username} (${rank})!`)
+        if (!signup.success) {
+            popUp(res, "bad", signup.result)
+            return res.redirect('/admin/user/create')
+        }
+        popUp(res, "good", `Bruker "${username}" har blitt registrert`)
+        Log.write(`${req.name} (sysadmin) created user: ${username} (${rank})!`)
         return res.redirect('/admin/user/view')
     } catch(err) {
         render500(req, res, err)
@@ -66,11 +71,17 @@ const userEdit_post = async (req, res) => {
     const rank = req.body.rank
     try {
         let user = await User.findById(id)
-        if (!user) return res.redirect(`/admin/user/view/`)
-        user.rank = rank
-        user.save()
-        Log.write(`${req.name} (sysadmin) updated user ${user.username}'s rank to (${rank})!`)
-        return res.redirect('/')
+        if (!user) {
+            popUp(res, "good", `Bruker "${username}" har blitt registrert`)
+            return res.redirect(`/admin/user/view/`)
+        }
+        if (user.rank != rank) {
+            user.rank = rank
+            user.save()
+            Log.write(`${req.name} (sysadmin) updated user ${user.username}'s rank to (${rank})!`)
+        }
+        popUp(res, "good", "Endringer har blitt lagret")
+        return res.redirect(`/admin/user/view/${id}`)
     } catch(err) {
         render500(req, res, err)
     }
@@ -82,9 +93,12 @@ const userDelete_post = async (req, res) => {
         let user = await User.findById(id)
         console.log(id)
         console.log(user)
-        if (!user) return res.redirect(`/admin/user/view/`)
-
+        if (!user) {
+            popUp(res, "bad", `Bruker "${username}" kunne ikke bli funnet`)
+            return res.redirect(`/admin/user/view/`)
+        }
         user = await User.findByIdAndDelete(id)
+        popUp(res, "good", `Bruker "${user.username}" har blitt slettet`)
         Log.write(`${req.name} (sysadmin) deleted user: ${user.username} (${user.rank})!`)
         return res.redirect(`/admin/user/view/`)
     } catch (err) {
@@ -100,6 +114,7 @@ const challDelete_post = async (req, res) => {
             return res.redirect(`/teacher/chall/view/${_id}`)
         }
         await Chall.findByIdAndDelete(_id)
+        popUp(res, "good", `Utfordringen "${chall.title}" har blitt slettet`)
         Log.write(`${req.name} (sysadmin) deleted post: ${chall.title} (${chall._id})!`)
         res.redirect(`/teacher/chall/view`)
     } catch (err) {
@@ -113,12 +128,14 @@ const answDelete_post = async (req, res) => {
         let answ = await Answ.findById(_id)
         let chall = await Chall.findReply(_id)
         if (!answ) {
+            popUp(res, "bad", `Svaret kunne ikke bli funnet`)
             return res.redirect(`/teacher/chall/view/${_id}`)
         }
         console.log(chall)
         chall.replies.splice(chall.replies.indexOf(_id), 1)
         await chall.save()
         await Answ.findByIdAndDelete(_id)
+        popUp(res, "good", `Svaret har blitt slettet`)
         Log.write(`${req.name} (sysadmin) deleted answer in "${chall.title}" (${chall._id})!`)
         res.redirect(`/teacher/chall/view/${chall._id}`)
     } catch (err) {

@@ -1,5 +1,5 @@
 const han = require('../handlers/han-mod')
-const { login_perform } = require('../handlers/han-con')
+const { login_perform, popUp } = require('../handlers/han-con')
 const { setMetaData, render500 } = require('../handlers/han-main')
 
 const login_get = (req, res) => {
@@ -12,15 +12,19 @@ const login_post = async (req, res) => {
     const password = req.body.password
     try {
         const user = await login_perform(res, username, password)
-        if (user) return res.redirect('/')
-
-        res.redirect('./login')
+        if (!user.success) {
+            popUp(res, "bad", user.result)
+            return res.redirect('./login')
+        } 
+        popUp(res, "good", "Logget inn!")
+        return res.redirect('/')
     } catch (err) {
         render500(req, res)
     }
 }
 const logout_post = (req, res) => {
     setMetaData(req, res, "logout post")
+    popUp(res, "good", "Logget ut")
     res.clearCookie('user')
     res.redirect('./login')
 }

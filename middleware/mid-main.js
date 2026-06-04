@@ -4,6 +4,9 @@ const setLocals = (req, res, next) => {
     res.locals.loggedIn = false
     res.locals.metatitle = "Ukjent side"
     res.locals.navCurr = ""
+    res.locals.popup = req.cookies?.popup
+    res.clearCookie('popup')
+    console.log(req.cookies)
     req.user = NaN
     next()
 }

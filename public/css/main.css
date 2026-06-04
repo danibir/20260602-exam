@@ -12,8 +12,14 @@
     --s2: rgb(255, 189, 56);
     --s3: rgb(255, 20, 20);
 
-    --roof-width: 56px;
-    --roof2-width: calc(var(--roof-width) - 8px);
+    --roof-height: 56px;
+    --roof2-height: calc(var(--roof-height) - 8px);
+    
+    --popup-x: 16px;
+    --popup-good: rgb(192, 255, 168);
+    --popup-goodborder: rgb(128, 168, 96);
+    --popup-bad: rgb(255, 168, 168);
+    --popup-badborder: rgb(168, 96, 96);
 }
 
 
@@ -27,11 +33,11 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--roof-width);
+    height: var(--roof-height);
     background: var(--black);
 }
 #roof {
-    height: var(--roof2-width);
+    height: var(--roof2-height);
 }
 
 
@@ -206,4 +212,30 @@ nav a {
     border-width: 3px;
     border-color: var(--dark-grey);
     border-style: solid;
+}
+.popup {
+    position: absolute;
+    top: var(--popup-x);
+    width: 100%;
+}
+.popupbox {
+    padding: 10px;
+    width: 40%;
+    border-width: 3px;
+    border-style: dashed;
+}
+.popup .popupgood {
+    background-color: var(--popup-good);
+    border-color: var(--popup-goodborder);
+}
+.popup .popupbad {
+    background-color: var(--popup-bad);
+    border-color: var(--popup-badborder);
+}
+.popupbox p {
+    width: 85%;
+}
+.popupbox img {
+    width: 6%;
+    height: 6%;
 }

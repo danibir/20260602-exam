@@ -2,6 +2,7 @@ const Chall = require('../models/mod-chall')
 const Answ = require('../models/mod-answ')
 const User = require('../models/mod-user')
 const Log = require('../models/mod-log')
+const { popUp } = require('../handlers/han-con')
 const { setMetaData, render500 } = require('../handlers/han-main')
 
 const challCreate_get = (req, res) => {
@@ -19,10 +20,13 @@ const challCreate_post = async (req, res) => {
         if (!Array.isArray(tags)) tags = [tags]
 
         const allValid = tags.every(item => Chall.AVAILABLE_TAGS.includes(item))
-        if (!allValid) return res.status(400).send("Missing required fields")
-            
+        if (!allValid) {
+            popup(res, "bad", "Ugyldige etiketter")
+            return res.render('/student/create')
+        }
         if (!title || !content || isNaN(status)) {
-            return res.status(400).send("Missing required fields")
+            popup(res, "bad", "Mangler obligatoriske felt")
+            return res.render('/student/create')
         }
 
         const op = await User.findOne({ username: req.name })
@@ -38,6 +42,7 @@ const challCreate_post = async (req, res) => {
         console.log(challObj)
         const chall = new Chall(challObj)
         await chall.save()
+        popup(res, "good", "Registrerte utfordring!")
         Log.write(`${op.username} (${op.rank}) created post: ${chall.title} (${chall._id})!`)
         res.redirect('/')
     } catch (err) {

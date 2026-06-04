@@ -1,6 +1,7 @@
 const User = require('../models/mod-user')
 const Chall = require('../models/mod-chall')
 const han_mod = require('../handlers/han-mod')
+const { popUp } = require('../handlers/han-con')
 const { setMetaData, render500 } = require('../handlers/han-main')
 
 const index_get = (req, res) => {
@@ -26,12 +27,19 @@ const changepasswd_post = async (req, res) => {
     const oldpass = req.body.oldpassword
     const newpass = req.body.newpassword
     const newpass2 = req.body.newpassword2
-    if (newpass != newpass2) return res.redirect('/profile/changepasswd')
+    if (newpass != newpass2) {
+        popUp(res, "bad", "Passord stemmer ikke")
+        return res.redirect('/profile/changepasswd')
+    }
     try {
         const login = await han_mod.login(req.name, oldpass)
-        if (!login.success) return res.redirect('/profile/changepasswd')
+        if (!login.success) {
+            popUp(res, "bad", "Gammelt passord stemmer ikke")
+            return res.redirect('/profile/changepasswd')
+        }
         login.result.password = newpass
         login.result.save()
+        popUp(res, "good", "Byttet passord!")
         res.redirect('/profile')
     } catch (err) {
         render500(req, res)

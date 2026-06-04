@@ -2,6 +2,7 @@ const Chall = require('../models/mod-chall')
 const Answ = require('../models/mod-answ')
 const User = require('../models/mod-user')
 const Log = require('../models/mod-log')
+const { popUp } = require('../handlers/han-con')
 const { setMetaData, render500 } = require('../handlers/han-main')
 
 const challOverview_get = async (req, res) => {
@@ -45,10 +46,14 @@ const challEdit_post = async (req, res) => {
         let tags = req.body.tags || []
         if (!Array.isArray(tags)) tags = [tags]
         const chall = await Chall.findById(id)
-        if (!chall) res.redirect(`/teacher/chall/view/${id}`)
+        if (!chall) {
+            popUp(res, "bad", "Kunne ikke finne utfordring")
+            return res.redirect(`/teacher/chall/view/${id}`)
+        }
         chall.status = status
         chall.tags = tags
         await chall.save()
+        popUp(res, "good", "Oppdaterte utfordring!")
         Log.write(`${req.name} (${req.rank}) updated "${chall.title}" (${chall._id})`)
         return res.redirect(`/teacher/chall/view/${id}`)
     } catch(err) {
@@ -61,7 +66,10 @@ const answerCreate_post = async (req, res) => {
     const content = req.body.content
     try {
         const chall = await Chall.findById(id)
-        if (!chall) return res.redirect('/teacher/chall/view')
+        if (!chall) {
+            popup(res, "bad", "Kunne ikke finne utfordring")
+            return res.redirect('/teacher/chall/view')
+        }
         
         const op = await User.findOne({ username: req.name })
         console.log(op)
@@ -74,7 +82,8 @@ const answerCreate_post = async (req, res) => {
         await answ.save()
         chall.replies.push(answ._id)
         await chall.save()
-            Log.write(`${req.name} (${req.rank}) answered "${chall.title}" (${chall._id})`)
+        popUp(res, "good", "La til kommentar!")
+        Log.write(`${req.name} (${req.rank}) answered "${chall.title}" (${chall._id})`)
         return res.redirect(`/teacher/chall/view/${id}`)
     } catch (err) {
         render500(req, res)

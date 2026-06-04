@@ -5,10 +5,10 @@ const argon2 = require('argon2')
 //login
 const signup = async(username, password, rank) => {
     const rankList = ["student", "teacher", "sysadmin"]
-    if (!rankList.includes(rank)) return console.log('signup fail, invalid rank')
+    if (!rankList.includes(rank)) return { success: false, result: 'Ugyldig rolle'}
     const name = username.trim().toLowerCase()
     const userExists = await User.exists({ username: name })
-    if(userExists) return console.log('signup fail, user exists')
+    if(userExists) return { success: false, result: 'Bruker er allerede i database'}
     
     const userObj = {
         username: username,
@@ -19,16 +19,16 @@ const signup = async(username, password, rank) => {
     await user.save()
 
     console.log('signup success')
-    return user
+    return { success: true, result: user}
 }
 const login = async(username, password) => {
     console.log('logging in')
     const name = username.trim().toLowerCase()
     const user = await User.findOne({ username: name })
-    if(!user) return { success: false, result: "No user"}
+    if(!user) return { success: false, result: "Feil brukernavn eller passord"}
     
     const valid = await argon2.verify(user.password, password)
-    if (!valid) return { success: false, result: "Invalid pass"}
+    if (!valid) return { success: false, result: "Feil brukernavn eller passord"}
 
     return { success: true, result: user}
 }
