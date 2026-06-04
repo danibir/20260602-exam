@@ -1,0 +1,30 @@
+<%- include('./partials/head') %>
+
+<div class="box center flexcol">
+    <h1>Registrer bruker</h1>
+    <form action="/admin/user/create" method="post">
+        <label for="username">Brukernavn</label>
+        <br>
+        <input type="text" name="username" id="username" required>
+        <br>
+        <br>
+        <label for="password">Passord</label>
+        <br>
+        <input type="password" name="password" id="password" required>
+        <br>
+        <br>
+        <input type="radio" name="rank" id="rank" value="student">
+        <label for="rank">Student</label>
+        <br>
+        <input type="radio" name="rank" id="rank" value="teacher">
+        <label for="rank">Lærer</label>
+        <br>
+        <input type="radio" name="rank" id="rank" value="sysadmin">
+        <label for="rank">Administrator</label>
+        <br>
+        <br>
+        <button>Registrer</button>
+    </form>
+</div>
+
+<%- include('./partials/foot') %>

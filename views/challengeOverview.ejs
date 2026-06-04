@@ -1,0 +1,15 @@
+<%- include('./partials/head') %>
+<head><script src="/js/unradio.js" defer></script></head>
+
+<div class="box centerhor flexrow">
+    <section center="center flexcol part">
+        <%- include('./partials/searchchall', {place: "view", independant: false}) %>
+    </section>
+    <section class="center flexcol part">
+        <% for( chall of challs ) { %>
+            <%- include('./partials/challengePreview', { chall: chall, variant: "teacher/chall" }) %>
+        <% } %>
+    </section>
+</div>
+
+<%- include('./partials/foot') %>

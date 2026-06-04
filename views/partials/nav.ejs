@@ -1,10 +1,20 @@
-<nav>
+<nav class="navbox center">
     <% if (loggedIn) { %>
-        <a href="/">Home</a>
+        <a id="<% if (navCurr == "home") { %>navactive<% } %>" href="/" >Hjem</a>
+        <a id="<% if (navCurr == "profile") { %>navactive<% } %>" href="/profile">Profil</a>
+        <% if (rank == "sysadmin") { %>
+            <a id="<% if (navCurr == "log") { %>navactive<% } %>" href="/admin/logs">Logg</a>
+            <a id="<% if (navCurr == "users") { %>navactive<% } %>" href="/admin/user/view">Brukere</a>
+            <a id="<% if (navCurr == "chall") { %>navactive<% } %>" href="/teacher/chall/view">Utfordringer</a>
+        <% } %>
+        <% if (rank == "teacher") { %>
+            <a id="<% if (navCurr == "chall") { %>navactive<% } %>" href="/teacher/chall/view">Utfordringer</a>
+        <% } %>
+        <% if (rank == "student") { %>
+            <a id="<% if (navCurr == "challcreate") { %>navactive<% } %>" href="/student/create">Meld utfordring</a>
+        <% } %>
         <form action="/login/log-out" method="post">
-            <button>Log out</button>
+            <button>Logg ut</button>
         </form>
-    <% } else { %>
-        <a href="/login/login">Login</a>
     <% } %>
 </nav>

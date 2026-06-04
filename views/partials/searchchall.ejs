@@ -1,0 +1,29 @@
+<form action="./<%= place %>" method="get">
+    <input type="text" name="search" id="search" placeholder="Søk..." value="<%= query.search %>">
+    <br>
+    <br>
+    <label for="status">Status:</label>
+    <br>
+    <input type="radio" name="status" id="status" value="3" <% if (query.status == 3) { %>checked<% } %>>
+    <label for="status">Veldig viktig</label>
+    <br>
+    <input type="radio" name="status" id="status" value="2" <% if (query.status == 2) { %>checked<% } %>>
+    <label for="status">Noe viktig</label>
+    <br>
+    <input type="radio" name="status" id="status" value="1" <% if (query.status == 1) { %>checked<% } %>>
+    <label for="status">Litt viktig</label>
+    <br>
+    <input type="radio" name="status" id="status" value="0" <% if (query.status == 0) { %>checked<% } %>>
+    <label for="status">Løst</label>
+    <br>
+    <br>
+    <label for="tags">Etiketter:</label>
+    <br>
+    <% for( tag of tags ) { %>
+        <input type="checkbox" name="tags" id="tags" value="<%= tag %>" <% if (query.tags && query.tags.includes(tag)) { %>checked<% } %>>
+        <label for="tags"><%= tag %></label>
+        <br>
+    <% } %>
+    <br>
+    <button>Søk</button>
+</form>

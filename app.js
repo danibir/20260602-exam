@@ -17,8 +17,15 @@ const app = express()
 
 //routers
 
+const rou_admin = require('./routers/rou-admin')
 const rou_main = require('./routers/rou-main')
 const rou_login = require('./routers/rou-login')
+const rou_student = require('./routers/rou-student')
+const rou_teacher = require('./routers/rou-teacher')
+
+//handlers
+
+const han_main = require('./handlers/han-main')
 
 //config
 
@@ -27,9 +34,19 @@ app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
-app.use(helmet())
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false,
+        crossOriginOpenerPolicy: false,
+        crossOriginResourcePolicy: false,
+        originAgentCluster: false,
+        hsts: false
+    })
+)
 app.use(cookieParser())
 app.use(mid_main.setLocals)
+app.use(mid_auth.auth)
 
 //Connecting to db and starting server
 
@@ -39,6 +56,7 @@ Promise.all([
 .then(()=>{
     mid_main.dbSetStatus(true)
     console.log('Database connection success.')
+    require('./scripts/rootInit')()
 })
 .catch((err)=>{
     mid_main.dbSetStatus(false)
@@ -48,14 +66,16 @@ Promise.all([
     })
 })
 .finally(()=>{
-    app.use(mid_auth.auth)
-
     app.use('/login', rou_login)
     app.use(mid_auth.authRestrain)
     app.use('/', rou_main)
+    app.use('/student', rou_student)
+    app.use('/teacher', rou_teacher)
+    app.use('/admin', rou_admin)
+    
 
     app.use((req, res) => {
-        res.status(404).render('error', { error: "404 - Page not found" })
+        han_main.renderErrorPage(res, 404, "Kunne ikke finne side")
     })
     app.listen(3000, () => {
         console.log('Server is running on port 3000 and on', os.hostname())

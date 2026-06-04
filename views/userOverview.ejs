@@ -1,0 +1,10 @@
+<%- include('./partials/head') %>
+<div class="box center flexcol">
+    <%- include('./partials/searchbar', {place: "view"}) %>
+    <a class="preview" href="/admin/user/create">Lag ny bruker</a>
+    <% for( user of users ) { %>
+        <%- include('./partials/userPreview', { user: user }) %>
+    <% } %>
+</div>
+
+<%- include('./partials/foot') %>

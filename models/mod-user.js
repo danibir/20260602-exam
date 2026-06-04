@@ -14,13 +14,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    rank: {
+        type: String,
+        required: true
     }
+}, {
+    timestamps: true 
 })
 
-//hash everything
+//hash password
 userSchema.pre('save', async function () {
     if (this.isModified('password')) {
         this.password = await argon2.hash(this.password)

@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const User = require('../models/mod-user')
-const han = require('../handlers/han-mod')
+const han_mod = require('../handlers/han-mod')
+const han = require('../handlers/han-main')
 
 //JWT token verification
 const auth = async (req, res, next) => {
@@ -10,18 +11,13 @@ const auth = async (req, res, next) => {
         try {
             const payload = jwt.verify(token, process.env.SECRET)
             console.log(payload)
-            const user = await han.userExists(payload.username)
+            const user = await han_mod.userExists(payload.username)
             
-            if (user.isAdmin == false) {
-                console.log('user')
-            } else {
-                console.log('admin')
-                res.locals.isAdmin = true
-                res.isAdmin = true
-            }
+            req.rank = user.rank
+            res.locals.rank = user.rank
 
             res.locals.name = payload.username
-            req.user = payload.username
+            req.name = payload.username
             res.locals.loggedIn = true
 
             return next()
@@ -49,10 +45,9 @@ const reverseAuth = (req, res, next) => {
     next()
 }
 
-const authAdmin = async (req, res, next) => {
-    if (!req.user) {
-        return res.status('error', { error: "403 - Forbidden" })
-    }
+const authRole = (role) => (req, res, next) => {
+    if (req.rank != role && req.rank != "sysadmin") 
+        return han.renderErrorPage(res, 403, "Forbidden")
     next()
 }
 
@@ -60,5 +55,5 @@ module.exports = {
     auth,
     authRestrain,
     reverseAuth,
-    authAdmin
+    authRole
 }

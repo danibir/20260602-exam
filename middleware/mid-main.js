@@ -2,7 +2,11 @@ const setLocals = (req, res, next) => {
     res.locals.name = "NaN"
     res.locals.isAdmin = false
     res.locals.loggedIn = false
-    res.locals.title = "Side..."
+    res.locals.metatitle = "Ukjent side"
+    res.locals.navCurr = ""
+    res.locals.popup = req.cookies?.popup
+    res.clearCookie('popup')
+    console.log(req.cookies)
     req.user = NaN
     next()
 }
